@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Printers</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+                <img src="Aura Printers png.png" alt="Company Logo">
+        </div>
+        <div class="cart">
+            <button onclick="openCartModal()" class="cart-button">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i><span id="cart-count">0</span>
+            </button>
+        </div>
+        <div class="menu">
+            <div class="header-menu">
+                <button onclick="toggleMenu()"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                <div class="dropdown-content" id="dropdown-content" style="display: none;">
+                    <a href="../index.html">Home</a>
+                    <a href="#" onclick="toggleSubMenu(event)">Categories</a>
+                    <div id="sub-menu" class="dropdown-content" style="display: none;">
+                        <a href="#best-selling">Best Selling</a>
+                        <a href="#customized-poster">Customized Poster</a>
+                        <a href="/Posters/Cars.html">Car</a>
+                        <a href="/Posters/Bike.html">Bike</a>
+                        <a href="/Posters/Motivation.html">Motivation</a>
+                        <a href="/Posters/Movies_marvel.html">Movies & Marvel</a>
+                        <a href="/Posters/Aesthetics.html">Aesthetics</a>
+                        <a href="/Posters/Singers.html">Singer</a>
+                        <a href="/Posters/Sneakers.html">Sneakers</a>
+                        <a href="/Posters/Weekend.html">Weekend</a>
+                        <a href="/Posters/Sports.html">Sports</a>
+                        <a href="/Posters/Anime.html">Anime</a>
+                        <a href="/Posters/Tripy.html">Tripy</a>
+                        <a href="/Posters/Girls_vibe.html">Girls Vibe</a>
+                        <a href="/Posters/Tamil.html">Tamil</a>
+                        <a href="/Posters/Vintage.html">Vintage</a>
+                    </div>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+        
+    </header>
+
+    <!-- Scrolling Text -->
+    <div class="scrolling-text">
+        <marquee behavior="scroll" direction="left">
+            Buy 1 and get 2 posters free!   &nbsp;&nbsp;&nbsp;&nbsp;  Free shipping all over Tamil Nadu!  &nbsp;&nbsp;&nbsp;&nbsp;  Fast Delivery in 3-4 Days All Over TN
+        </marquee>
+    </div>
+
+    <!-- Main Heading -->
+    <h1 class="main-heading">Wall Posters Categories</h1>
+
+    <!-- Category Grid -->
+    <div class="category-grid">
+        <div class="category-card" onclick="location.href='/Posters/Cars.html'">
+            <img src="poster1.jpeg" alt="Car Posters">
+            <h2>Car</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Anime.html'">
+            <img src="poster2.jpeg" alt="Anime">
+            <h2>Anime</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Weekend.html'">
+            <img src="poster3.jpeg" alt="Weekend">
+            <h2>Weekend</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Sports.html'">
+            <img src="poster4.jpg" alt="Sports">
+            <h2>Sports</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Aesthetics.html'">
+            <img src="poster5.jpg" alt="Aesthetics">
+            <h2>Aesthetics</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Sneakers.html'">
+            <img src="poster15.jpg" alt="Sneakers">
+            <h2>Sneakers</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Singers.html'">
+            <img src="poster7.jpg" alt="Singers">
+            <h2>Singers</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Motivation.html'">
+            <img src="poster8.jpg" alt="Motivation">
+            <h2>Motivation</h2>
+        </div>
+        <div class="category-card" onclick="location.href='./Posters/Movies_marvel.html'">
+            <img src="poster9.jpg" alt="Movies & Marvel">
+            <h2>Movies & Marvel</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Bike.html'">
+            <img src="poster10.jpg" alt="Bike">
+            <h2>Bike</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Tripy.html'">
+            <img src="poster11.jpg" alt="Tripy">
+            <h2>Tripy</h2>
+        </div>
+        <div class="category-card" onclick="location.href='/Posters/Girls_vibe.html'">
+            <img src="poster12.jpg" alt="Girls Vibes">
+            <h2>Girls Vibes</h2>
+        </div>
+        <!-- New Tamil Category -->
+        <div class="category-card" onclick="location.href='/Posters/Tamil.html'">
+            <img src="/Tamil images/img4.jpeg" alt="Tamil Posters">
+            <h2>Tamil</h2>
+        </div>
+        <!-- New Vintage Category -->
+        <div class="category-card" onclick="location.href='/Posters/Vintage.html'">
+            <img src="Vintage images/img4.jpeg" alt="Vintage Posters">
+            <h2>Vintage</h2>
+        </div>
+    </div>
+    
+
+        
+   
+
+    <!-- Best Selling Section -->
+    <div id="best-selling" class="best-selling">
+        <h2>Best Selling</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="sendWhatsAppMessage('Weekend Classic')">
+                <img src="best1.jpg" alt="Best Selling Poster 1">
+                <p><strong>Weekend Classic</strong></p>
+            </div>
+            <div class="category-card" onclick="sendWhatsAppMessage('One Piece Classic')">
+                <img src="best2.jpg" alt="Best Selling Poster 2">
+                <p><strong>One Piece Classic</strong></p>
+            </div>
+            <div class="category-card" onclick="sendWhatsAppMessage('Lana del rey Classic')">
+                <img src="best3.jpg" alt="Best Selling Poster 3">
+                <p><strong>Lana del rey Classic</strong></p>
+            </div>
+            <div class="category-card" onclick="sendWhatsAppMessage('Porsche Classic')">
+                <img src="best4.jpg" alt="Best Selling Poster 4">
+                <p><strong>Porsche Classic</strong></p>
+            </div>
+        </div>
+    </div>
+
+     <!-- Customized Poster Section -->
+     <div id="customized-poster" class="best-selling">
+        <h2>Customized Poster</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="sendWhatsAppMessage('₹149-(4-Posters)')">
+                <img src="Customized images/Customized.png" alt="Best Selling Poster 1">
+                <p><strong>₹149-(4-Posters)</strong></p>
+            </div>
+            <div class="category-card" onclick="sendWhatsAppMessage('₹299 (8-posters)')">
+                <img src="Customized images/8pic img.jpg" alt="Best Selling Poster 2">
+                <p><strong>₹299 (8-posters)</strong></p>
+            </div>
+            <div class="category-card" onclick="sendWhatsAppMessage('₹499 (16-posters)')">
+                <img src="Customized images/16pic img.jpg" alt="Best Selling Poster 3">
+                <p><strong>₹499 (16-posters)</strong></p>
+            </div>
+            <div class="category-card" onclick="sendWhatsAppMessage('₹799 (30-posters)')">
+                <img src="Customized images/30pic img.jpg" alt="Best Selling Poster 4">
+                <p><strong>₹799 (30-posters)</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="why-us">
+            <h2>Why Us?</h2>
+            <ul>
+                <li>High-Quality Prints - Crisp and vibrant posters</li>
+                <li>Gum Sheet Posters - Easy to stick, no extra adhesive needed</li>
+                <li>Trendy & Custom Designs - Posters that match your vibe</li>
+                <li>Affordable & Long-Lasting - Great quality at budget-friendly prices</li>
+            </ul>
+        </div>
+
+
+    <!-- Customer Reviews Section -->
+    <div class="customer-reviews">
+        <h2>Customer Reviews</h2>
+        <div class="review">
+            <p>"Amazing quality posters! The prints are vibrant and the material is top-notch. Highly recommended!"</p>
+            <strong>- Arjun K.</strong>
+        </div>
+        <div class="review">
+            <p>"Super fast delivery and excellent packaging. Loved the designs. Will order again!"</p>
+            <strong>- Priya M.</strong>
+        </div>
+        <div class="review">
+            <p>"Great service and unique posters. Definitely worth the price!"</p>
+            <strong>- Rahul S.</strong>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCartModal()">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total"></div>
+            <button id="checkout-button" onclick="checkout()" class="checkout-button">
+                Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    
+
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <p><strong>Address:</strong> 291, Aura Printers, Vanilaiaaraichi Maiyam, Tiruvannamalai, Tamil Nadu</p>
+            <p><strong>Email:</strong> <a href="mailto:auraprintersofficial@gmail.com">auraprintersofficial@gmail.com</a></p>
+            <p><strong>Mobile:</strong> 9952151652, 6383064859</p>
+            <p>&copy; 2025 Aura Printers. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
