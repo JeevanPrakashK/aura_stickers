@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weeknd - Aura Printers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .logo img {
+            height: 40px;
+        }
+        .menu {
+            position: relative;
+        }
+        .menu button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .menu button:hover {
+            background-color: #000000;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            z-index: 1;
+            right: 0;
+        }
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 1rem;
+        }
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+        }
+        .menu:hover .dropdown-content {
+            display: block;
+        }
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .product-card h3 {
+            margin: px 0 10px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .product-card p {
+            margin: 0 0 15px;
+            font-size: 1rem;
+            color: #777;
+        }
+        .product-card button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .product-card button:hover {
+            background-color: #128c7e;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-content p {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+        .footer-content a {
+            color: #ff5722;
+            text-decoration: none;
+        }
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+        /* Add to your existing style section */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-button {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.checkout-button {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.remove-button {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#cart-total {
+    margin-top: 20px;
+    text-align: right;
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="../Aura Printers png.png" alt="Company Logo">
+        </div>
+        <div class="cart">
+            <button onclick="openCartModal()" class="cart-button">
+                🛒 Cart (<span id="cart-count">0</span>)
+            </button>
+        </div>
+        <div class="menu">
+            <button>☰</button>
+            <div class="dropdown-content">
+                <a href="../index.html">Home</a>
+                <a href="#" onclick="toggleSubMenu(event)">Categories</a>
+                <a href="../#contact">Contact</a>
+                <div id="sub-menu" class="dropdown-content" style="display:none;">
+                    <a href="../#best-selling">Best Selling</a>
+                    <a href="../#customized-poster">Customized Poster</a>
+                    <a href="/Posters/Aesthetics.html">Aesthetics</a>
+                    <a href="/Posters/Anime.html">Anime</a>
+                    <a href="/Posters/Bike.html">Bike</a>
+                    <a href="/Posters/Cars.html">Car</a>
+                    <a href="/Posters/Girls_vibe.html">Girls Vibe</a>
+                    <a href="/Posters/Motivation.html">Motivation</a>
+                    <a href="/Posters/Movies_marvel.html">Movies & Marvel</a>
+                    <a href="/Posters/Singers.html">Singer</a>
+                    <a href="/Posters/Sneakers.html">Sneakers</a>
+                    <a href="/Posters/Sports.html">Sports</a>
+                    <a href="/Posters/Tripy.html">Tripy</a>
+                    <a href="/Posters/Tamil.html">Tamil</a>
+                    <a href="/Posters/Vintage.html">Vintage</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h1 style="text-align: center; color: #333;">Weeknd Collections</h1>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="/Weekend images/img1.jpg" alt="Product 1">
+                <h3>The Weeknd after hours</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+
+                <button onclick="addToCart('The Weeknd after hours', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="/Weekend images/img2.jpg" alt="Product 2">
+                <h3>The Weeknd Starboy</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('The Weeknd Starboy', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="/Weekend images/img3.jpg" alt="Product 3">
+                <h3>The Weeknd Album</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('The Weeknd Album', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="/Weekend images/img4.jpg" alt="Product 4">
+                <h3>After hours Weeknd</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('After hours Weeknd', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="/Weekend images/img5.jpg" alt="Product 5">
+                <h3>Tronica Mono weeknd </h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('Tronica Mono weeknd', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="/Weekend images/img6.jpg" alt="Product 6">
+                <h3>Weeknd Classic Poster</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('Weeknd Classic Poster', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+            <!-- Product 7 -->
+            <div class="product-card">
+                <img src="/Weekend images/img7.jpg" alt="Product 7">
+                <h3>Weeknd 4look Poster</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('Weeknd 4look Poster', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+            <!-- Product 8 -->
+            <div class="product-card">
+                <img src="/Weekend images/img8.jpg" alt="Product 8">
+                <h3>Weeknd Graphic Poster</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('Weeknd Graphic Poster', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+            <!-- Product 9 -->
+            <div class="product-card">
+                <img src="/Weekend images/img9.jpg" alt="Product 9">
+                <h3>Vintage Weeknd Poster</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('Vintage Weeknd Poster', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+
+            <!-- Product 10 -->
+            <div class="product-card">
+                <img src="/Weekend images/img10.jpg" alt="Product 9">
+                <h3>B/W Weeknd Poster</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('B/W Weeknd Poster', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+
+            <!-- Product 11 -->
+            <div class="product-card">
+                <img src="/Weekend images/img11.jpg" alt="Product 9">
+                <h3>Pop Art Weeknd</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('Pop Art Weeknd', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+
+            <!-- Product 12 -->
+            <div class="product-card">
+                <img src="/Weekend images/img12.jpg" alt="Product 9">
+                <h3>Weeknd Cover Poster</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('Weeknd Cover Poster', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+
+            <!-- Product 13 -->
+            <div class="product-card">
+                <img src="/Weekend images/img13.jpg" alt="Product 9">
+                <h3>Weeknd Magazine</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('Weeknd Magazine', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+
+
+            <!-- Product 14 -->
+            <div class="product-card">
+                <img src="/Weekend images/img14.jpg" alt="Product 10">
+                <h3>Weeknd Waltractive</h3>
+                <h4><strong>Size-A4</strong> </h4>
+                <p><strong>Price:</strong> ₹149 + Free Shipping</p>
+                <button onclick="addToCart('Weeknd Waltractive', 'Size-A4' ,'₹149 + Free Shipping')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCartModal()">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total"></div>
+            <button id="checkout-button" onclick="checkout()" class="checkout-button">
+                Checkout via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p><strong>Address:</strong> 291, Aura Printers, Vanilaiaaraichi Maiyam, Tiruvannamalai, Tamil Nadu</p>
+            <p><strong>Email:</strong> <a href="mailto:auraprintersofficial@gmail.com">auraprintersofficial@gmail.com</a></p>
+            <p><strong>Mobile:</strong> 9952151652, 6383064859</p>
+            <p>&copy; 2025 Aura Printers. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+       // Initialize cart from localStorage or empty array
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Update cart count
+function updateCartCount() {
+    document.getElementById("cart-count").innerText = cart.length;
+}
+
+// Add item to cart
+function addToCart(name, size, price) {
+    let item = { name, size, price };
+    cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert("Item added to cart!");
+}
+
+// Remove item from cart
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    displayCartItems();
+}
+
+// Calculate total with "Buy 1 Get 2 Free" offer
+function calculateTotal(cartItems) {
+    // Count how many sets of 3 items are in the cart
+    const paidItems = Math.ceil(cartItems.length / 3);
+    return paidItems * 149; // Only charge 149 for every third item
+}
+
+// Display cart items in modal
+function displayCartItems() {
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    cartItems.innerHTML = "";
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = "<p>Your cart is empty</p>";
+        cartTotal.innerHTML = "";
+        document.getElementById("checkout-button").style.display = "none";
+        return;
+    }
+
+    // Add offer message
+    const offerMessage = document.createElement("div");
+    offerMessage.className = "offer-message";
+    offerMessage.innerHTML = "<p style='color: green; margin-bottom: 15px;'><strong>Special Offer:</strong> Buy 1 Get 2 Free! 🎉</p>";
+    cartItems.appendChild(offerMessage);
+
+    cart.forEach((item, index) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+        // Calculate if this item is free
+        const isFree = (index + 1) % 3 !== 1;
+        itemDiv.innerHTML = `
+            <div>
+                <strong>${item.name}</strong>
+                <br>
+                <small>${item.size} - ${isFree ? '<span style="color: green">FREE</span>' : '₹149'}</small>
+            </div>
+            <button class="remove-button" onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartItems.appendChild(itemDiv);
+    });
+
+    const total = calculateTotal(cart);
+    cartTotal.innerHTML = `
+        <div style="margin-top: 10px;">
+            <p>Items in cart: ${cart.length}</p>
+            <p>Paid items: ${Math.ceil(cart.length / 3)}</p>
+            <p>Free items: ${cart.length - Math.ceil(cart.length / 3)}</p>
+            <strong>Total: ₹${total}</strong>
+        </div>
+    `;
+    document.getElementById("checkout-button").style.display = "block";
+}
+
+// Open cart modal
+function openCartModal() {
+    document.getElementById("cart-modal").style.display = "block";
+    displayCartItems();
+}
+
+// Close cart modal
+function closeCartModal() {
+    document.getElementById("cart-modal").style.display = "none";
+}
+
+// Checkout via WhatsApp
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    let message = "Hello, I want to order:\n\n";
+    
+    cart.forEach((item, index) => {
+        const isFree = (index + 1) % 3 !== 1;
+        message += `- ${item.name} (${item.size}) - ${isFree ? 'FREE' : '₹149'}\n`;
+    });
+    
+    const total = calculateTotal(cart);
+    message += `\nTotal Items: ${cart.length}`;
+    message += `\nPaid Items: ${Math.ceil(cart.length / 3)}`;
+    message += `\nFree Items: ${cart.length - Math.ceil(cart.length / 3)}`;
+    message += `\nTotal Amount: ₹${total}`;
+    message += "\n\n(Buy 1 Get 2 Free Offer Applied)";
+    
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/6383064859?text=${encodedMessage}`, "_blank");
+    
+    // Clear cart after checkout
+    cart = [];
+    localStorage.removeItem("cart");
+    updateCartCount();
+    closeCartModal();
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById("cart-modal");
+    if (event.target == modal) {
+        closeCartModal();
+    }
+}
+
+// Initialize cart count on page load
+updateCartCount();
+
+  // Function to toggle the main menu
+function toggleMenu() {
+    const dropdownContent = document.getElementById('dropdown-content');
+    const subMenu = document.getElementById('sub-menu');
+    
+    // Toggle main dropdown
+    if (dropdownContent.style.display === 'block') {
+        dropdownContent.style.display = 'none';
+        // Also hide submenu when closing main menu
+        subMenu.style.display = 'none';
+    } else {
+        dropdownContent.style.display = 'block';
+    }
+}
+
+// Function to toggle the sub-menu
+function toggleSubMenu(event) {
+    event.preventDefault(); // Prevent the default anchor behavior
+    event.stopPropagation(); // Prevent the click from closing the main menu
+    
+    const subMenu = document.getElementById('sub-menu');
+    subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+}
+
+// Close menus when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.querySelector('.menu');
+    const dropdownContent = document.getElementById('dropdown-content');
+    const subMenu = document.getElementById('sub-menu');
+    
+    // If click is outside the menu
+    if (!menu.contains(event.target)) {
+        dropdownContent.style.display = 'none';
+        subMenu.style.display = 'none';
+    }
+});
+
+// Initialize the cart count on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+});
+    </script>
+</body>
+</html> 
